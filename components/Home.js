@@ -7,7 +7,7 @@ import {
   View,
   ScrollView,
 } from "react-native";
-export const Home = () => {
+export const Home = (navigation) => {
   state = {
     names: [
       { name: "Ben", id: 1 },
@@ -29,17 +29,40 @@ export const Home = () => {
   };
   return (
     <>
-      <View>
-        <ScrollView>
-          {this.state.names.map((item, index) => (
-            <View>
-              <View key={item.id} style={styles.item}>
-                <Text onPress={() => alert("ji")}>{item.name}</Text>
+      <ScrollView style={styles.contianer}>
+        <View style={styles.input}>
+          <TextInput
+            placeholder="What do you want to search for?"
+            style={styles.search}
+          />
+        </View>
+        <View>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {this.state.names.map((item, index) => (
+              <View>
+                <View style={styles.item}>
+                  <Text key={item.id} onPress={() => alert("ji")}>
+                    {item.name}
+                  </Text>
+                </View>
               </View>
-            </View>
-          ))}
-        </ScrollView>
-      </View>
+            ))}
+          </ScrollView>
+        </View>
+        <View>
+          <ScrollView>
+            {this.state.names.map((item, index) => (
+              <View>
+                <View style={styles.item}>
+                  <Text key={item.id} onPress={() => alert("ji")}>
+                    {item.name}
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+      </ScrollView>
     </>
   );
 };
@@ -47,6 +70,15 @@ export const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
+  contianer: {
+    flex: 1,
+    padding: 10,
+  },
+  search: {
+    borderRadius: 5,
+    padding: 10,
+    borderWidth: 1,
+  },
   item: {
     flexDirection: "row",
     justifyContent: "space-between",
